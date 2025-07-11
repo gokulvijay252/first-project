@@ -6,6 +6,7 @@ import { findUserByEmailAndPassword } from '../services/login';
 const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
 
 export const Login = async (req: Request, res: Response) => {
+
   const { email, password } = req.body;
 
   try {
@@ -17,7 +18,7 @@ export const Login = async (req: Request, res: Response) => {
 
     const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
 
-    return res.json({ status: 'success', token });
+    return res.status(200).json({ status: 'user login successfully', token });
   } catch (err) {
     console.error('Login error:', err);
     return res.status(500).json({ status: 'error', message: 'Server error' });
