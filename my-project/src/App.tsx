@@ -1,12 +1,9 @@
 import React from 'react';
-import Login from './components/Login';
 
-const App: React.FC = () => {
-  return (
-    <div>
-      <Login />
-    </div>
-  );
+const App = () => {
+  return <h1 className="text-2xl text-center mt-10">Welcome to the App</h1>;
 };
 
 export default App;
+
+
