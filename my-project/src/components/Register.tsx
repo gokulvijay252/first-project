@@ -17,7 +17,7 @@ const Register = () => {
             const res = await createRegister(username, email, password);
             saveToken(res.token);
 
-            toast.success('Registration Successful...!');
+            toast.success('User Registered Successfully...!');
         } catch (err: any) {
             console.error(err);
 
@@ -61,10 +61,7 @@ const Register = () => {
                     required
                 />
 
-                <button
-                    type="submit"
-                    className="bg-blue-600 text-white py-2 w-full rounded hover:bg-blue-700"
-                >
+                <button type="submit" className="bg-blue-600 text-white py-2 w-full rounded hover:bg-blue-700">
                     Register
                 </button>
             </form>

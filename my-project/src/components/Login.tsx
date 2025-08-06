@@ -3,7 +3,6 @@ import { loginUser } from '../services/authService';
 import { saveToken } from '../utils/tokenUtils';
 import { Link } from 'react-router-dom';
 
-// ✅ Toastify imports
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -20,8 +19,7 @@ const Login = () => {
       const res = await loginUser(email, password);
       saveToken(res.token);
 
-      // ✅ Show success toast (no timer, no close buton)
-      toast.success('Login Successful...!');
+      toast.success('Login Successfully...!');
     } catch (err: any) {
       setError(err.message);
 
@@ -33,9 +31,9 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-md w-96"
-      >
-        <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
+        className="bg-white p-6 rounded-lg shadow-md w-96">
+          
+        <h2 className="text-2xl font-bold font-roboto mb-4 text-center">Login</h2>
 
         <input
           type="email"
@@ -57,11 +55,8 @@ const Login = () => {
 
         {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
 
-        <button
-          type="submit"
-          className="bg-blue-600 text-white py-2 w-full rounded hover:bg-blue-700"
-        >
-          Login
+        <button type="submit" className="bg-blue-700 text-white font-roboto py-2 w-full rounded hover:bg-blue-800">
+            Submit
         </button>
 
         <div className="text-center mt-4 text-sm text-gray-600">
@@ -72,7 +67,6 @@ const Login = () => {
         </div>
       </form>
 
-      {/* ✅ Toast container with custom config */}
       <ToastContainer
         autoClose={false}
         closeButton={false}
