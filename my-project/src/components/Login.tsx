@@ -3,6 +3,10 @@ import { loginUser } from '../services/authService';
 import { saveToken } from '../utils/tokenUtils';
 import { Link } from 'react-router-dom';
 
+// ✅ Toastify imports
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,9 +19,13 @@ const Login = () => {
     try {
       const res = await loginUser(email, password);
       saveToken(res.token);
-      alert('Login Successful...!');
+
+      // ✅ Show success toast (no timer, no close buton)
+      toast.success('Login Successful...!');
     } catch (err: any) {
       setError(err.message);
+
+      toast.error(err.message || 'Login Failed');
     }
   };
 
@@ -49,11 +57,13 @@ const Login = () => {
 
         {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
 
-        <button type="submit" className="bg-blue-600 text-white py-2 w-full rounded hover:bg-blue-700">
+        <button
+          type="submit"
+          className="bg-blue-600 text-white py-2 w-full rounded hover:bg-blue-700"
+        >
           Login
         </button>
 
-        {/* Register link using React Router */}
         <div className="text-center mt-4 text-sm text-gray-600">
           Don't have an account?{' '}
           <Link to="/register" className="text-blue-600 hover:underline">
@@ -61,6 +71,15 @@ const Login = () => {
           </Link>
         </div>
       </form>
+
+      {/* ✅ Toast container with custom config */}
+      <ToastContainer
+        autoClose={false}
+        closeButton={false}
+        position="bottom-right"
+        pauseOnHover={false}
+        draggable={false}
+      />
     </div>
   );
 };

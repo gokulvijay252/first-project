@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { createRegister } from '../services/authService';
 import { saveToken } from "../utils/tokenUtils";
 
+// ✅ Toastify imports
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Register = () => {
     const [username, setusername] = useState('');
     const [email, setEmail] = useState('');
@@ -12,19 +16,24 @@ const Register = () => {
         try {
             const res = await createRegister(username, email, password);
             saveToken(res.token);
-            alert('Registration successful...!');
+
+            toast.success('Registration Successful...!');
         } catch (err: any) {
             console.error(err);
-            alert('Registration failed: ' + err.message);
+
+            // ✅ Show error toast
+            toast.error('Registration failed: ' + err.message);
         }
     }
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <form 
                 onSubmit={handleRegister}
-                className="bg-white p-6 rounded-lg shadow-md w-96">
-                    
+                className="bg-white p-6 rounded-lg shadow-md w-96"
+            >
                 <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
+
                 <input
                     type="text"
                     placeholder="Username"
@@ -33,6 +42,7 @@ const Register = () => {
                     onChange={(e) => setusername(e.target.value)}
                     required
                 />
+
                 <input
                     type="email"
                     placeholder="Email"
@@ -41,6 +51,7 @@ const Register = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
+
                 <input
                     type="password"
                     placeholder="Password"
@@ -49,13 +60,24 @@ const Register = () => {
                     onChange={(e) => setpassword(e.target.value)}
                     required
                 />
-                <button type="submit" className="bg-blue-600 text-white py-2 w-full rounded hover:bg-blue-700"
->
+
+                <button
+                    type="submit"
+                    className="bg-blue-600 text-white py-2 w-full rounded hover:bg-blue-700"
+                >
                     Register
                 </button>
             </form>
+
+            <ToastContainer
+                autoClose={false}
+                closeButton={false}
+                position="bottom-right"
+                pauseOnHover={false}
+                draggable={false}
+            />
         </div>
-    )
+    );
 }
 
 export default Register;
